@@ -1,5 +1,4 @@
 Commands:
-    - implement ADD command
     - implement PRINT command
     - implement CLEAR command
     - implement SORT command
