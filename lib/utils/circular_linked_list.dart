@@ -66,7 +66,7 @@ class CircularLinkedList<T> {
     for (var i = 0; i < n - 1; i++) {
       node = node!.next as CircularLinkedListNode<T>?;
     }
-    node!.next = node!.next!.next;
+    node!.next = node.next!.next;
     _length--;
   }
 
