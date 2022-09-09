@@ -1,5 +1,6 @@
 import 'package:apiary_dart/apiary_dart.dart';
 import 'package:apiary_dart/utils/circular_linked_list.dart';
+import 'package:apiary_dart/vm/vm_commands.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -39,5 +40,25 @@ void main() {
     expect(list.length, 4);
     list.remove(2);
     expect(list.length, 3);
+  });
+  test("VMContext skeleton test", () {
+    final vmContext = VMContext.createVMContext();
+    expect(vmContext.entities.length, 0);
+    expect(
+      () => vmContext.executeCommands(),
+      returnsNormally,
+    );
+  });
+
+  test("VMCommandEcho test", () {
+    final vmContext = VMContext.createVMContext();
+    expect(
+      () => vmContext.pushCommand(VMCommandEcho('Hello, world!')),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.executeCommands(),
+      returnsNormally,
+    );
   });
 }
