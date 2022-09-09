@@ -4,5 +4,4 @@ Commands:
     - implement CLEAR command
     - implement SORT command
     - implement REM command
-    - implement EXIT command
     - implement RENAME command
