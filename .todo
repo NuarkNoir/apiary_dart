@@ -5,13 +5,10 @@ Commands:
     - implement PRINT command
     - implement CLEAR command
     - implement SORT command
-    - implement REM command
 Tests:
-    - test ADD command
     - test EXIT command
     - test PRINT command
     - test CLEAR command
     - test SORT command
-    - test REM command
     - test lexer
     - test parser
