@@ -6,7 +6,6 @@ Commands:
     - implement CLEAR command
     - implement SORT command
     - implement REM command
-    - implement RENAME command
 Tests:
     - test ADD command
     - test EXIT command
@@ -14,6 +13,5 @@ Tests:
     - test CLEAR command
     - test SORT command
     - test REM command
-    - test RENAME command
     - test lexer
     - test parser
