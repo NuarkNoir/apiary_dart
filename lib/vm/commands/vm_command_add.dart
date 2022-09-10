@@ -3,7 +3,7 @@ import 'package:apiary_dart/entities/base_entity.dart';
 import '../vm.dart';
 import 'vm_command.dart';
 
-class VMCommandAdd extends VMCommand {
+class VMCommandAdd implements VMCommand {
   final BaseEntity _entity;
 
   VMCommandAdd(this._entity);
