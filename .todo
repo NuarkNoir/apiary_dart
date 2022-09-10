@@ -3,7 +3,5 @@ Main:
     - create lexer
 Commands:
 Tests:
-    - test EXIT command
-    - test PRINT command
     - test lexer
     - test parser

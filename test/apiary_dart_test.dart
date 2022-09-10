@@ -191,4 +191,28 @@ void main() {
     expect(vmContext.entities.get(0)?.dest, "test2");
     expect(vmContext.entities.get(2)?.dest, "test");
   });
+
+  test("VMComandPrint test", () async {
+    final vmContext = VMContext.createVMContext();
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(1, 2, "test", "train name", 3))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(1, 2, "test", "train name", 3))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(1, 2, "test", "train name", 3))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(VMComandPrint()),
+      returnsNormally,
+    );
+    await vmContext.executeCommands();
+  });
 }

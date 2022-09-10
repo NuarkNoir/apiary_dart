@@ -9,8 +9,6 @@ class CircularLinkedListNode<T> {
 
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! CircularLinkedListNode) return false;
-    return data == other.data && next == other.next;
+    return identical(this, other);
   }
 }
