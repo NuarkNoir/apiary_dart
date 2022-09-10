@@ -124,7 +124,7 @@ SORT name
 PRINT
 ECHO ==============================================================
 
-ECHO now let's rename 2nd element (non-existant)
+ECHO now let's rename 2nd element
 RENAME 1 brand_new_name
 PRINT
 ECHO ==============================================================
