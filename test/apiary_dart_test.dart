@@ -2,6 +2,8 @@ import 'package:apiary_dart/apiary_dart.dart';
 import 'package:apiary_dart/entities/boat_entity.dart';
 import 'package:apiary_dart/entities/plane_entity.dart';
 import 'package:apiary_dart/entities/train_entity.dart';
+import 'package:apiary_dart/parser/parser.dart';
+import 'package:apiary_dart/parser/token_type.dart';
 import 'package:apiary_dart/utils/circular_linked_list.dart';
 import 'package:test/test.dart';
 
@@ -214,5 +216,20 @@ void main() {
       returnsNormally,
     );
     await vmContext.executeCommands();
+  });
+
+  test("Parser parse capabilities", () {
+    final parser = Parser();
+
+    parser.parse("asd asd\n asd 1.0 1 asd\n".split("\n"));
+    expect(parser.linesOfTokens.length, 2);
+    expect(
+      parser.linesOfTokens[0].map<TokenType>((e) => e.type),
+      [TokenType.word, TokenType.word],
+    );
+    expect(
+      parser.linesOfTokens[1].map<TokenType>((e) => e.type),
+      [TokenType.word, TokenType.double, TokenType.number, TokenType.word],
+    );
   });
 }
