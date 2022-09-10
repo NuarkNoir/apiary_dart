@@ -79,8 +79,7 @@ void main() {
       () async => vmContext.executeCommands(),
       returnsNormally,
     );
-    // await vmContext.executeCommands();
     expect(vmContext.entities.length, 1);
-    expect(vmContext.entities.get(0).name, "new train name");
+    expect(vmContext.entities.get(0)!.name, "new train name");
   });
 }
