@@ -2,7 +2,6 @@ import 'package:apiary_dart/apiary_dart.dart';
 import 'package:apiary_dart/entities/boat_entity.dart';
 import 'package:apiary_dart/entities/plane_entity.dart';
 import 'package:apiary_dart/entities/train_entity.dart';
-import 'package:apiary_dart/parser/parser.dart';
 import 'package:apiary_dart/parser/token_type.dart';
 import 'package:apiary_dart/utils/circular_linked_list.dart';
 import 'package:test/test.dart';
