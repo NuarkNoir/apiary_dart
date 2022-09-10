@@ -1,7 +1,6 @@
 import 'package:apiary_dart/apiary_dart.dart';
 import 'package:apiary_dart/entities/train_entity.dart';
 import 'package:apiary_dart/utils/circular_linked_list.dart';
-import 'package:apiary_dart/vm/commands/vm_command_add.dart';
 import 'package:apiary_dart/vm/vm_commands.dart';
 import 'package:test/test.dart';
 
@@ -43,28 +42,22 @@ void main() {
     list.remove(2);
     expect(list.length, 3);
   });
-  test("VMContext skeleton test", () {
+  test("VMContext skeleton test", () async {
     final vmContext = VMContext.createVMContext();
     expect(vmContext.entities.length, 0);
-    expect(
-      () => vmContext.executeCommands(),
-      returnsNormally,
-    );
+    await vmContext.executeCommands();
   });
 
-  test("VMCommandEcho test", () {
+  test("VMCommandEcho test", () async {
     final vmContext = VMContext.createVMContext();
     expect(
       () => vmContext.pushCommand(VMCommandEcho('Hello, world!')),
       returnsNormally,
     );
-    expect(
-      () => vmContext.executeCommands(),
-      returnsNormally,
-    );
+    await vmContext.executeCommands();
   });
 
-  test("VMCommandEcho rename", () async {
+  test("VMCommandRename test", () async {
     final vmContext = VMContext.createVMContext();
     expect(
       () => vmContext.pushCommand(
@@ -75,11 +68,28 @@ void main() {
       () => vmContext.pushCommand(VMCommandRename(0, "new train name")),
       returnsNormally,
     );
-    await expectLater(
-      () async => vmContext.executeCommands(),
-      returnsNormally,
-    );
+    await vmContext.executeCommands();
     expect(vmContext.entities.length, 1);
     expect(vmContext.entities.get(0)!.name, "new train name");
+  });
+
+  test("VMCommandRem test", () async {
+    final vmContext = VMContext.createVMContext();
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(5, 5, "test", "train name", 8))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(5, 5, "test", "train name", 7))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(VMCommandRem("name", "train name", "=")),
+      returnsNormally,
+    );
+    await vmContext.executeCommands();
+    expect(vmContext.entities.length, 0);
   });
 }
