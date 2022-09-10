@@ -1,16 +1,16 @@
 import 'dart:io';
 
 import '../vm.dart';
-import 'vm_command.dart';
+import 'vm_comand.dart';
 
 ///
-/// Command to rename entity
+/// Comand to rename entity
 ///
-class VMCommandRename implements VMCommand {
+class VMComandRename implements VMComand {
   final int _index;
   final String _newName;
 
-  const VMCommandRename(this._index, this._newName);
+  const VMComandRename(this._index, this._newName);
 
   @override
   Future<void> execute(VMContext ctx) async {

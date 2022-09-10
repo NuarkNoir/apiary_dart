@@ -1,14 +1,14 @@
 import '../../entities/base_entity.dart';
 import '../vm.dart';
-import 'vm_command.dart';
+import 'vm_comand.dart';
 
 ///
-/// Command to add entity to the list
+/// Comand to add entity to the list
 ///
-class VMCommandAdd implements VMCommand {
+class VMComandAdd implements VMComand {
   final BaseEntity _entity;
 
-  VMCommandAdd(this._entity);
+  VMComandAdd(this._entity);
 
   @override
   Future<void> execute(VMContext ctx) async {

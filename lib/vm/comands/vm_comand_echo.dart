@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import '../vm.dart';
-import 'vm_command.dart';
+import 'vm_comand.dart';
 
 ///
-/// Echo command
+/// Echo comand
 ///
-class VMCommandEcho implements VMCommand {
+class VMComandEcho implements VMComand {
   final Object? _data;
 
-  VMCommandEcho(this._data);
+  VMComandEcho(this._data);
 
   @override
   Future<void> execute(VMContext _) async {

@@ -1,0 +1,9 @@
+export 'comands/vm_comand.dart';
+export 'comands/vm_comand_echo.dart';
+export 'comands/vm_comand_exit.dart';
+export 'comands/vm_comand_rename.dart';
+export 'comands/vm_comand_add.dart';
+export 'comands/vm_comand_rem.dart';
+export 'comands/vm_comand_clear.dart';
+export 'comands/vm_comand_print.dart';
+export 'comands/vm_comand_sort.dart';

@@ -1,16 +1,16 @@
 import '../../utils/comparators.dart';
 import '../vm.dart';
-import 'vm_command.dart';
+import 'vm_comand.dart';
 
 ///
-/// Command to remove entity from the list by its attr value
+/// Comand to remove entity from the list by its attr value
 ///
-class VMCommandRem implements VMCommand {
+class VMComandRem implements VMComand {
   final String _attr;
   final String _value;
   final String _op;
 
-  const VMCommandRem(this._attr, this._value, this._op);
+  const VMComandRem(this._attr, this._value, this._op);
 
   @override
   Future<void> execute(VMContext ctx) async {

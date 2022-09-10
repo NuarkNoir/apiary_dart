@@ -1,7 +1,7 @@
 import '../entities/base_entity.dart';
 import '../utils/circular_linked_list.dart';
 import '../utils/circular_linked_list_node.dart';
-import 'vm_commands.dart';
+import 'vm_comands.dart';
 
 ///
 ///Typedefs to make code more readable
@@ -14,7 +14,7 @@ typedef EntityNode = CircularLinkedListNode<BaseEntity>;
 ///
 class VMContext {
   /// List of entities
-  late final List<VMCommand> _commands;
+  late final List<VMComand> _comands;
 
   /// List of entities
   late final EntityList _entities;
@@ -24,25 +24,25 @@ class VMContext {
 
   /// Constructor
   VMContext.createVMContext() {
-    _commands = [];
+    _comands = [];
     _entities = EntityList();
   }
 
   ///
-  /// Add command to the list
-  /// [command] - command to add
+  /// Add comand to the list
+  /// [comand] - comand to add
   ///
-  void pushCommand(VMCommand command) {
-    _commands.add(command);
+  void pushComand(VMComand comand) {
+    _comands.add(comand);
   }
 
   ///
-  /// Execute all commands
+  /// Execute all comands
   ///
-  Future<void> executeCommands() async {
-    for (final command in _commands) {
-      await command.execute(this);
+  Future<void> executeComands() async {
+    for (final comand in _comands) {
+      await comand.execute(this);
     }
-    _commands.clear();
+    _comands.clear();
   }
 }

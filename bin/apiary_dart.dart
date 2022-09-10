@@ -4,7 +4,7 @@ import 'package:apiary_dart/apiary_dart.dart' as apiary_dart;
 
 ///
 /// Main function
-/// [arguments] - command line arguments
+/// [arguments] - comand line arguments
 ///
 void main(List<String> arguments) async {
   if (arguments.length > 1 ||
@@ -36,11 +36,11 @@ Future<void> runRepl() async {
     parser.parse([line.trim()].where((element) => element.isNotEmpty));
     final lexems = apiary_dart.Lexer.lex(parser.linesOfTokens);
     for (final lexem in lexems) {
-      vmContext.pushCommand(lexem);
+      vmContext.pushComand(lexem);
     }
     parser.linesOfTokens.clear();
 
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
   }
 }
 
@@ -56,8 +56,8 @@ Future<void> runFile(String path) {
   parser.parse(script.split("\n").where((element) => element.isNotEmpty));
   final lexems = apiary_dart.Lexer.lex(parser.linesOfTokens);
   for (final lexem in lexems) {
-    vmContext.pushCommand(lexem);
+    vmContext.pushComand(lexem);
   }
 
-  return vmContext.executeCommands();
+  return vmContext.executeComands();
 }

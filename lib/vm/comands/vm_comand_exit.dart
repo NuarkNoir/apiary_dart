@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import '../vm.dart';
-import 'vm_command.dart';
+import 'vm_comand.dart';
 
 ///
-/// Command to exit the program
+/// Comand to exit the program
 ///
-class VMCommandExit implements VMCommand {
+class VMComandExit implements VMComand {
   final int _code;
 
-  VMCommandExit(this._code);
+  VMComandExit(this._code);
 
   @override
   Future<void> execute(VMContext _) async {

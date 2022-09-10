@@ -1,11 +1,11 @@
 import '../../utils/comparators.dart';
 import '../vm.dart';
-import 'vm_command.dart';
+import 'vm_comand.dart';
 
 ///
-/// Command to sort entities by attr
+/// Comand to sort entities by attr
 ///
-class VMComandSort implements VMCommand {
+class VMComandSort implements VMComand {
   final String _attr;
 
   const VMComandSort(this._attr);

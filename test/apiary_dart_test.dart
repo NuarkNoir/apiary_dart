@@ -48,66 +48,66 @@ void main() {
   test("VMContext skeleton test", () async {
     final vmContext = VMContext.createVMContext();
     expect(vmContext.entities.length, 0);
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
   });
 
-  test("VMCommandEcho test", () async {
+  test("VMComandEcho test", () async {
     final vmContext = VMContext.createVMContext();
     expect(
-      () => vmContext.pushCommand(VMCommandEcho('Hello, world!')),
+      () => vmContext.pushComand(VMComandEcho('Hello, world!')),
       returnsNormally,
     );
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
   });
 
-  test("VMCommandRename test", () async {
+  test("VMComandRename test", () async {
     final vmContext = VMContext.createVMContext();
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(5, 5, "test", "train name", 8))),
+      () => vmContext
+          .pushComand(VMComandAdd(TrainEntity(5, 5, "test", "train name", 8))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(VMCommandRename(0, "new train name")),
+      () => vmContext.pushComand(VMComandRename(0, "new train name")),
       returnsNormally,
     );
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
     expect(vmContext.entities.length, 1);
     expect(vmContext.entities.get(0)!.name, "new train name");
   });
 
-  test("VMCommandRem test", () async {
+  test("VMComandRem test", () async {
     final vmContext = VMContext.createVMContext();
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(5, 5, "test", "train name", 8))),
+      () => vmContext
+          .pushComand(VMComandAdd(TrainEntity(5, 5, "test", "train name", 8))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(5, 5, "test", "train name", 7))),
+      () => vmContext
+          .pushComand(VMComandAdd(TrainEntity(5, 5, "test", "train name", 7))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(VMCommandRem("name", "train name", "=")),
+      () => vmContext.pushComand(VMComandRem("name", "train name", "=")),
       returnsNormally,
     );
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
     expect(vmContext.entities.length, 0);
   });
 
-  test("VMCommandClear test", () async {
+  test("VMComandClear test", () async {
     final vmContext = VMContext.createVMContext();
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(5, 5, "test", "train name", 8))),
+      () => vmContext
+          .pushComand(VMComandAdd(TrainEntity(5, 5, "test", "train name", 8))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(VMCommandClear()),
+      () => vmContext.pushComand(VMComandClear()),
       returnsNormally,
     );
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
     expect(vmContext.entities.length, 0);
   });
 
@@ -147,48 +147,48 @@ void main() {
   test("VMComandSort test", () async {
     final vmContext = VMContext.createVMContext();
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(100, 5, "test", "train name", 8))),
+      () => vmContext.pushComand(
+          VMComandAdd(TrainEntity(100, 5, "test", "train name", 8))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(21, 5, "test", "train name", 800))),
+      () => vmContext.pushComand(
+          VMComandAdd(TrainEntity(21, 5, "test", "train name", 800))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(799, 5, "test", "train name", 8))),
+      () => vmContext.pushComand(
+          VMComandAdd(TrainEntity(799, 5, "test", "train name", 8))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(VMComandSort("spd")),
+      () => vmContext.pushComand(VMComandSort("spd")),
       returnsNormally,
     );
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
     expect(vmContext.entities.get(0)?.spd, 799);
     expect(vmContext.entities.get(2)?.spd, 21);
 
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(100, 5, "test2", "train name", 8))),
+      () => vmContext.pushComand(
+          VMComandAdd(TrainEntity(100, 5, "test2", "train name", 8))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(BoatEntity(21, 5, "test", "boat name", 800, 1999))),
+      () => vmContext.pushComand(
+          VMComandAdd(BoatEntity(21, 5, "test", "boat name", 800, 1999))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(PlaneEntity(799, 5, "test", "plane name", 8, 31))),
+      () => vmContext.pushComand(
+          VMComandAdd(PlaneEntity(799, 5, "test", "plane name", 8, 31))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(VMComandSort("dest")),
+      () => vmContext.pushComand(VMComandSort("dest")),
       returnsNormally,
     );
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
     expect(vmContext.entities.get(0)?.dest, "test2");
     expect(vmContext.entities.get(2)?.dest, "test");
   });
@@ -196,25 +196,25 @@ void main() {
   test("VMComandPrint test", () async {
     final vmContext = VMContext.createVMContext();
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(1, 2, "test", "train name", 3))),
+      () => vmContext
+          .pushComand(VMComandAdd(TrainEntity(1, 2, "test", "train name", 3))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(1, 2, "test", "train name", 3))),
+      () => vmContext
+          .pushComand(VMComandAdd(TrainEntity(1, 2, "test", "train name", 3))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(
-          VMCommandAdd(TrainEntity(1, 2, "test", "train name", 3))),
+      () => vmContext
+          .pushComand(VMComandAdd(TrainEntity(1, 2, "test", "train name", 3))),
       returnsNormally,
     );
     expect(
-      () => vmContext.pushCommand(VMComandPrint()),
+      () => vmContext.pushComand(VMComandPrint()),
       returnsNormally,
     );
-    await vmContext.executeCommands();
+    await vmContext.executeComands();
   });
 
   test("Parser parse capabilities", () {

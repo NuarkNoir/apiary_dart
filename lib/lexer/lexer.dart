@@ -7,7 +7,7 @@ import '../entities/boat_entity.dart';
 import '../entities/plane_entity.dart';
 import '../entities/train_entity.dart';
 import '../parser/token.dart';
-import '../vm/vm_commands.dart';
+import '../vm/vm_comands.dart';
 
 ///
 /// Lexer class
@@ -24,22 +24,22 @@ class Lexer {
   /// Lex list of list of tokens
   /// [linesOfTokens] - list of list of tokens
   ///
-  /// Returns list of list of [VMCommand]s
+  /// Returns list of list of [VMComand]s
   ///
-  static List<VMCommand> lex(List<List<Token>> linesOfTokens) {
+  static List<VMComand> lex(List<List<Token>> linesOfTokens) {
     _validDestPrefixes.clear();
-    List<VMCommand> commands = [];
+    List<VMComand> comands = [];
 
     for (final lot in linesOfTokens) {
       if (lot.isEmpty) {
         continue;
       }
 
-      final command = Lexer._parseCommand(lot);
-      final val = command.value;
-      final exc = command.exception;
+      final comand = Lexer._parseComand(lot);
+      final val = comand.value;
+      final exc = comand.exception;
       if (val != null) {
-        commands.add(val);
+        comands.add(val);
       } else if (exc != null) {
         stderr.writeln(exc);
       } else {
@@ -47,15 +47,15 @@ class Lexer {
       }
     }
 
-    return commands;
+    return comands;
   }
 
-  static OptionalOf<VMCommand> _parseCommand(List<Token> tokens) {
+  static OptionalOf<VMComand> _parseComand(List<Token> tokens) {
     if (tokens.isNotEmpty && _expectToken(tokens[0], TokenType.word)) {
       final args = tokens.sublist(1);
       switch (tokens[0].value.toLowerCase()) {
         case '@meta':
-          return _parseMetaCommand(args);
+          return _parseMetaComand(args);
         case 'echo':
           return _parseEcho(args);
         case 'exit':
@@ -96,7 +96,7 @@ class Lexer {
     return true;
   }
 
-  static OptionalOf<VMCommand> _parseMetaCommand(List<Token> tokens) {
+  static OptionalOf<VMComand> _parseMetaComand(List<Token> tokens) {
     if (tokens.isNotEmpty && _expectToken(tokens[0], TokenType.word)) {
       switch (tokens[0].value.toLowerCase()) {
         case 'append-to-var':
@@ -104,17 +104,17 @@ class Lexer {
       }
     }
 
-    return OptionalOf.error(Exception("Unknown meta command: $tokens"));
+    return OptionalOf.error(Exception("Unknown meta comand: $tokens"));
   }
 
-  static OptionalOf<VMCommand> _parseMetaAppendToVar(List<Token> tokens) {
+  static OptionalOf<VMComand> _parseMetaAppendToVar(List<Token> tokens) {
     if (tokens.length >= 2 && _expectToken(tokens[0], TokenType.word)) {
       final variable = tokens[0].asString;
       final values = tokens.sublist(1);
       switch (variable) {
         case 'destination_prefixes':
           Lexer._validDestPrefixes.addAll(values.map((e) => e.asString));
-          return OptionalOf.ok(VMCommandEcho(
+          return OptionalOf.ok(VMComandEcho(
             "[meta] new valid prefixes list: ${Lexer._validDestPrefixes}",
           ));
       }
@@ -125,21 +125,21 @@ class Lexer {
     ));
   }
 
-  static OptionalOf<VMCommand> _parseEcho(List<Token> args) {
-    return OptionalOf.ok(VMCommandEcho(args.map((e) => e.asString).join(" ")));
+  static OptionalOf<VMComand> _parseEcho(List<Token> args) {
+    return OptionalOf.ok(VMComandEcho(args.map((e) => e.asString).join(" ")));
   }
 
-  static OptionalOf<VMCommand> _parseExit(List<Token> args) {
+  static OptionalOf<VMComand> _parseExit(List<Token> args) {
     if (args.isEmpty) {
-      return OptionalOf.ok(VMCommandExit(0));
+      return OptionalOf.ok(VMComandExit(0));
     } else if (Lexer._expectTokens(args, [TokenType.number])) {
-      return OptionalOf.ok(VMCommandExit(args[0].asInt));
+      return OptionalOf.ok(VMComandExit(args[0].asInt));
     }
 
     return OptionalOf.error(Exception('Error: exit should be `exit [<code>]`'));
   }
 
-  static OptionalOf<VMCommand> _parsePrint(List<Token> args) {
+  static OptionalOf<VMComand> _parsePrint(List<Token> args) {
     if (Lexer._expectTokens(args, [])) {
       return OptionalOf.ok(VMComandPrint());
     }
@@ -147,15 +147,15 @@ class Lexer {
     return OptionalOf.error(Exception('Error: print should be `print`'));
   }
 
-  static OptionalOf<VMCommand> _parseClear(List<Token> args) {
+  static OptionalOf<VMComand> _parseClear(List<Token> args) {
     if (Lexer._expectTokens(args, [])) {
-      return OptionalOf.ok(VMCommandClear());
+      return OptionalOf.ok(VMComandClear());
     }
 
     return OptionalOf.error(Exception('Error: clear should be `clear`'));
   }
 
-  static OptionalOf<VMCommand> _parseAdd(List<Token> args) {
+  static OptionalOf<VMComand> _parseAdd(List<Token> args) {
     if (args.isNotEmpty && _expectToken(args[0], TokenType.word)) {
       switch (args[0].asString) {
         case 'train':
@@ -171,7 +171,7 @@ class Lexer {
         Exception('Error: add should be `add <name> ...<args>`'));
   }
 
-  static OptionalOf<VMCommand> _parseAddTrain(List<Token> args) {
+  static OptionalOf<VMComand> _parseAddTrain(List<Token> args) {
     if (_expectTokens(args, [
       TokenType.word,
       TokenType.number,
@@ -185,7 +185,7 @@ class Lexer {
           "Error: add train: invalid destination prefix: `${args[4].asString}`",
         ));
       }
-      return OptionalOf.ok(VMCommandAdd(TrainEntity(
+      return OptionalOf.ok(VMComandAdd(TrainEntity(
         args[2].asInt,
         args[3].asInt,
         "${args[4].asString} ${args[5].asString}",
@@ -199,7 +199,7 @@ class Lexer {
     ));
   }
 
-  static OptionalOf<VMCommand> _parseAddPlane(List<Token> args) {
+  static OptionalOf<VMComand> _parseAddPlane(List<Token> args) {
     if (_expectTokens(args, [
       TokenType.word,
       TokenType.number,
@@ -214,7 +214,7 @@ class Lexer {
           "Error: add plane: invalid destination prefix: `${args[5].asString}`",
         ));
       }
-      return OptionalOf.ok(VMCommandAdd(PlaneEntity(
+      return OptionalOf.ok(VMComandAdd(PlaneEntity(
         args[3].asInt,
         args[4].asInt,
         "${args[5].asString} ${args[6].asString}",
@@ -229,7 +229,7 @@ class Lexer {
     ));
   }
 
-  static OptionalOf<VMCommand> _parseAddBoat(List<Token> args) {
+  static OptionalOf<VMComand> _parseAddBoat(List<Token> args) {
     if (_expectTokens(args, [
       TokenType.word,
       TokenType.number,
@@ -244,7 +244,7 @@ class Lexer {
           "Error: add boat: invalid destination prefix: `${args[5].asString}`",
         ));
       }
-      return OptionalOf.ok(VMCommandAdd(BoatEntity(
+      return OptionalOf.ok(VMComandAdd(BoatEntity(
         args[3].asInt,
         args[4].asInt,
         "${args[5].asString} ${args[6].asString}",
@@ -259,7 +259,7 @@ class Lexer {
     ));
   }
 
-  static OptionalOf<VMCommand> _parseRem(List<Token> args) {
+  static OptionalOf<VMComand> _parseRem(List<Token> args) {
     if (args.length == 4 &&
         _expectToken(args[0], TokenType.word) &&
         args[0].asString == "if" &&
@@ -268,7 +268,7 @@ class Lexer {
       final attr = args[1].asString;
       final op = args[2].asString;
 
-      return OptionalOf.ok(VMCommandRem(attr, args[3].asString, op));
+      return OptionalOf.ok(VMComandRem(attr, args[3].asString, op));
     }
 
     return OptionalOf.error(Exception(
@@ -276,9 +276,9 @@ class Lexer {
     ));
   }
 
-  static OptionalOf<VMCommand> _parseRename(List<Token> args) {
+  static OptionalOf<VMComand> _parseRename(List<Token> args) {
     if (_expectTokens(args, [TokenType.number, TokenType.word])) {
-      return OptionalOf.ok(VMCommandRename(args[0].asInt, args[1].asString));
+      return OptionalOf.ok(VMComandRename(args[0].asInt, args[1].asString));
     }
 
     return OptionalOf.error(Exception(
@@ -286,7 +286,7 @@ class Lexer {
     ));
   }
 
-  static OptionalOf<VMCommand> _parseSort(List<Token> args) {
+  static OptionalOf<VMComand> _parseSort(List<Token> args) {
     if (_expectTokens(args, [TokenType.word])) {
       return OptionalOf.ok(VMComandSort(args[0].asString));
     }

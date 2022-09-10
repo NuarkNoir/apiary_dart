@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import '../vm.dart';
-import 'vm_command.dart';
+import 'vm_comand.dart';
 
 ///
-/// Command to print the list
+/// Comand to print the list
 ///
-class VMComandPrint implements VMCommand {
+class VMComandPrint implements VMComand {
   @override
   Future<void> execute(VMContext ctx) async {
     stdout.writeln("Count of elements: ${ctx.entities.length}");
