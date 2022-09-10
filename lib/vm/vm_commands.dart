@@ -6,3 +6,4 @@ export 'commands/vm_command_add.dart';
 export 'commands/vm_command_rem.dart';
 export 'commands/vm_command_clear.dart';
 export 'commands/vm_command_print.dart';
+export 'commands/vm_command_sort.dart';

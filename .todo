@@ -2,10 +2,8 @@ Main:
     - create parser
     - create lexer
 Commands:
-    - implement SORT command
 Tests:
     - test EXIT command
     - test PRINT command
-    - test SORT command
     - test lexer
     - test parser

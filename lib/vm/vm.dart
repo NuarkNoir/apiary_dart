@@ -25,5 +25,6 @@ class VMContext {
     for (final command in _commands) {
       await command.execute(this);
     }
+    _commands.clear();
   }
 }

@@ -102,4 +102,23 @@ class CircularLinkedList<T> {
     _head = null;
     _length = 0;
   }
+
+  void sort(bool Function(T a, T b) comparator) {
+    if (_head == null) {
+      return;
+    }
+    var node = _head;
+    for (var i = 0; i < _length; i++) {
+      var nextNode = node!.next as CircularLinkedListNode<T>?;
+      for (var j = i + 1; j < _length; j++) {
+        if (comparator(node.data, nextNode!.data)) {
+          final temp = node.data;
+          node.data = nextNode.data;
+          nextNode.data = temp;
+        }
+        nextNode = nextNode.next as CircularLinkedListNode<T>?;
+      }
+      node = node.next as CircularLinkedListNode<T>?;
+    }
+  }
 }

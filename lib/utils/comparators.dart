@@ -24,7 +24,19 @@ class Comparators {
     return false;
   }
 
-  static bool compareInt(int val, Object expected, String op) {
+  static bool compareEntities(BaseEntity a, BaseEntity b, String attr) {
+    if (a is TrainEntity) {
+      return Comparators._compareTrainEntities(a, b, attr);
+    } else if (a is PlaneEntity) {
+      return Comparators._comparePlaneEntities(a, b, attr);
+    } else if (a is BoatEntity) {
+      return Comparators._compareBoatEntities(a, b, attr);
+    }
+
+    return false;
+  }
+
+  static bool _compareInt(int val, Object expected, String op) {
     if (expected is int) {
       switch (op) {
         case "<":
@@ -39,7 +51,7 @@ class Comparators {
     return false;
   }
 
-  static bool compareString(String val, Object expected, String op) {
+  static bool _compareString(String val, Object expected, String op) {
     if (expected is String) {
       switch (op) {
         case "!=":
@@ -60,15 +72,15 @@ class Comparators {
   ) {
     switch (attr) {
       case "spd":
-        return Comparators.compareInt(a.spd, value, op);
+        return Comparators._compareInt(a.spd, value, op);
       case "dist":
-        return Comparators.compareInt(a.dist, value, op);
+        return Comparators._compareInt(a.dist, value, op);
       case "dest":
-        return Comparators.compareString(a.dest, value, op);
+        return Comparators._compareString(a.dest, value, op);
       case "name":
-        return Comparators.compareString(a.name, value, op);
+        return Comparators._compareString(a.name, value, op);
       case "cnt":
-        return Comparators.compareInt(a.cnt, value, op);
+        return Comparators._compareInt(a.cnt, value, op);
     }
 
     return false;
@@ -82,17 +94,17 @@ class Comparators {
   ) {
     switch (attr) {
       case "spd":
-        return Comparators.compareInt(a.spd, value, op);
+        return Comparators._compareInt(a.spd, value, op);
       case "dist":
-        return Comparators.compareInt(a.dist, value, op);
+        return Comparators._compareInt(a.dist, value, op);
       case "dest":
-        return Comparators.compareString(a.dest, value, op);
+        return Comparators._compareString(a.dest, value, op);
       case "name":
-        return Comparators.compareString(a.name, value, op);
+        return Comparators._compareString(a.name, value, op);
       case "len":
-        return Comparators.compareInt(a.len, value, op);
+        return Comparators._compareInt(a.len, value, op);
       case "cap":
-        return Comparators.compareInt(a.cap, value, op);
+        return Comparators._compareInt(a.cap, value, op);
     }
 
     return false;
@@ -106,17 +118,78 @@ class Comparators {
   ) {
     switch (attr) {
       case "spd":
-        return Comparators.compareInt(a.spd, value, op);
+        return Comparators._compareInt(a.spd, value, op);
       case "dist":
-        return Comparators.compareInt(a.dist, value, op);
+        return Comparators._compareInt(a.dist, value, op);
       case "dest":
-        return Comparators.compareString(a.dest, value, op);
+        return Comparators._compareString(a.dest, value, op);
       case "name":
-        return Comparators.compareString(a.name, value, op);
+        return Comparators._compareString(a.name, value, op);
       case "disp":
-        return Comparators.compareInt(a.disp, value, op);
+        return Comparators._compareInt(a.disp, value, op);
       case "year":
-        return Comparators.compareInt(a.year, value, op);
+        return Comparators._compareInt(a.year, value, op);
+    }
+
+    return false;
+  }
+
+  static bool _compareTrainEntities(TrainEntity a, BaseEntity b, String attr) {
+    if (b is TrainEntity) {
+      switch (attr) {
+        case "spd":
+          return a.spd < b.spd;
+        case "dist":
+          return a.dist < b.dist;
+        case "dest":
+          return a.dest.compareTo(b.dest) < 0;
+        case "name":
+          return a.name.compareTo(b.name) < 0;
+        case "cnt":
+          return a.cnt < b.cnt;
+      }
+    }
+
+    return false;
+  }
+
+  static bool _comparePlaneEntities(PlaneEntity a, BaseEntity b, String attr) {
+    if (b is PlaneEntity) {
+      switch (attr) {
+        case "spd":
+          return a.spd < b.spd;
+        case "dist":
+          return a.dist < b.dist;
+        case "dest":
+          return a.dest.compareTo(b.dest) < 0;
+        case "name":
+          return a.name.compareTo(b.name) < 0;
+        case "len":
+          return a.len < b.len;
+        case "cap":
+          return a.cap < b.cap;
+      }
+    }
+
+    return false;
+  }
+
+  static bool _compareBoatEntities(BoatEntity a, BaseEntity b, String attr) {
+    if (b is BoatEntity) {
+      switch (attr) {
+        case "spd":
+          return a.spd < b.spd;
+        case "dist":
+          return a.dist < b.dist;
+        case "dest":
+          return a.dest.compareTo(b.dest) < 0;
+        case "name":
+          return a.name.compareTo(b.name) < 0;
+        case "disp":
+          return a.disp < b.disp;
+        case "year":
+          return a.year < b.year;
+      }
     }
 
     return false;

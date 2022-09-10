@@ -1,8 +1,8 @@
 import 'package:apiary_dart/apiary_dart.dart';
+import 'package:apiary_dart/entities/boat_entity.dart';
+import 'package:apiary_dart/entities/plane_entity.dart';
 import 'package:apiary_dart/entities/train_entity.dart';
 import 'package:apiary_dart/utils/circular_linked_list.dart';
-import 'package:apiary_dart/vm/commands/vm_command_clear.dart';
-import 'package:apiary_dart/vm/vm_commands.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -43,6 +43,7 @@ void main() {
     list.remove(2);
     expect(list.length, 3);
   });
+
   test("VMContext skeleton test", () async {
     final vmContext = VMContext.createVMContext();
     expect(vmContext.entities.length, 0);
@@ -107,5 +108,87 @@ void main() {
     );
     await vmContext.executeCommands();
     expect(vmContext.entities.length, 0);
+  });
+
+  test("Circular list sort test", () {
+    final list = CircularLinkedList<int>();
+    expect(list.head, null);
+    expect(list.tail, null);
+
+    list.add(1);
+    list.add(9);
+    list.add(3);
+    list.add(7);
+    list.add(5);
+    list.add(9);
+
+    expect(list.length, 6);
+
+    list.sort((a, b) => a < b);
+
+    expect(list.get(0), 9);
+    expect(list.get(1), 9);
+    expect(list.get(2), 7);
+    expect(list.get(3), 5);
+    expect(list.get(4), 3);
+    expect(list.get(5), 1);
+
+    list.sort((a, b) => a > b);
+
+    expect(list.get(0), 1);
+    expect(list.get(1), 3);
+    expect(list.get(2), 5);
+    expect(list.get(3), 7);
+    expect(list.get(4), 9);
+    expect(list.get(5), 9);
+  });
+
+  test("VMComandSort test", () async {
+    final vmContext = VMContext.createVMContext();
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(100, 5, "test", "train name", 8))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(21, 5, "test", "train name", 800))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(799, 5, "test", "train name", 8))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(VMComandSort("spd")),
+      returnsNormally,
+    );
+    await vmContext.executeCommands();
+    expect(vmContext.entities.get(0)?.spd, 799);
+    expect(vmContext.entities.get(2)?.spd, 21);
+
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(100, 5, "test2", "train name", 8))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(BoatEntity(21, 5, "test", "boat name", 800, 1999))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(PlaneEntity(799, 5, "test", "plane name", 8, 31))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(VMComandSort("dest")),
+      returnsNormally,
+    );
+    await vmContext.executeCommands();
+    expect(vmContext.entities.get(0)?.dest, "test2");
+    expect(vmContext.entities.get(2)?.dest, "test");
   });
 }
