@@ -1,7 +1,4 @@
 Main:
-    - create parser
-    - create lexer
+    - cli
 Commands:
 Tests:
-    - test lexer
-    - test parser

@@ -3,10 +3,10 @@
 #   train{cnt:int, spd:int, dist:int, dest:str} 
 # ]
 # meta: [
-#   dest str-format: anyOf("гор.", "д.", "п.г.т.", "с.") + word
+#   dest str-format: anyOf("РіРѕСЂ.", "Рґ.", "Рї.Рі.С‚.", "СЃ.") + word
 # ]
 
-@meta append-to-var destination_prefixes гор. д. п.г.т. с.
+@meta append-to-var destination_prefixes РіРѕСЂ. Рґ. Рї.Рі.С‚. СЃ.
 
 ECHO ERR_WRONG_KW
 SROT
@@ -19,7 +19,7 @@ ADD trein
 ECHO ERR_WRONG_PARAMS
 ADD plane
 ADD train 1 1 1 1
-ADD train 1 1 1 гор. тест 1
+ADD train 1 1 1 РіРѕСЂ. С‚РµСЃС‚ 1
 ECHO ERR_MALFORMED_INPUT
 SORT
 REM
@@ -39,78 +39,78 @@ REM if spd ; 5
 ECHO ==============================================================
 
 ECHO check REM first node
-ADD train train1 1 5 1 гор. тест
-ADD plane plane1 1 1 1 1 гор. тест
+ADD train train1 1 5 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane1 1 1 1 1 РіРѕСЂ. С‚РµСЃС‚
 REM if spd = 5
 PRINT
 CLEAR
 ECHO ==============================================================
 
 ECHO check REM last node
-ADD train train1 1 1 1 гор. тест
-ADD plane plane1 5 1 1 1 гор. тест
+ADD train train1 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane1 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
 REM if len = 5
 PRINT
 CLEAR
 ECHO ==============================================================
 
 ECHO check REM middle node
-ADD train train1 1 1 1 гор. тест
-ADD plane plane1 5 1 1 1 гор. тест
-ADD plane plane2 6 1 1 1 гор. тест
+ADD train train1 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane1 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane2 6 1 1 1 РіРѕСЂ. С‚РµСЃС‚
 REM if len = 5
 PRINT
 CLEAR
 ECHO ==============================================================
 
 ECHO check REM first mult node
-ADD plane plane1 5 1 1 1 гор. тест
-ADD plane plane2 5 1 1 1 гор. тест
-ADD plane plane3 5 1 1 1 гор. тест
-ADD plane plane4 6 1 1 1 гор. тест
+ADD plane plane1 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane2 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane3 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane4 6 1 1 1 РіРѕСЂ. С‚РµСЃС‚
 REM if len = 5
 PRINT
 CLEAR
 ECHO ==============================================================
 
 ECHO check REM last mult node
-ADD plane plane1 6 1 1 1 гор. тест
-ADD plane plane2 5 1 1 1 гор. тест
-ADD plane plane3 5 1 1 1 гор. тест
-ADD plane plane4 5 1 1 1 гор. тест
+ADD plane plane1 6 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane2 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane3 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane4 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
 REM if len = 5
 PRINT
 CLEAR
 ECHO ==============================================================
 
 ECHO check REM middle mult node
-ADD plane plane1 6 1 1 1 гор. тест
-ADD plane plane2 5 1 1 1 гор. тест
-ADD plane plane3 5 1 1 1 гор. тест
-ADD plane plane4 5 1 1 1 гор. тест
-ADD plane plane5 6 1 1 1 гор. тест
+ADD plane plane1 6 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane2 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane3 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane4 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane5 6 1 1 1 РіРѕСЂ. С‚РµСЃС‚
 REM if len = 5
 PRINT
 CLEAR
 ECHO ==============================================================
 
 ECHO check REM fragmented mult node
-ADD plane plane1 6 1 1 1 гор. тест
-ADD plane plane2 5 1 1 1 гор. тест
-ADD plane plane3 5 1 1 1 гор. тест
-ADD plane plane4 6 1 1 1 гор. тест
-ADD plane plane5 5 1 1 1 гор. тест
-ADD plane plane6 5 1 1 1 гор. тест
+ADD plane plane1 6 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane2 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane3 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane4 6 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane5 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane6 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
 REM if len = 5
 PRINT
 CLEAR
 ECHO ==============================================================
 
 ECHO let's add boats!
-ADD plane plane1 5 1 1 1 гор. тест
-ADD boat boat1 600 1999 1 1 гор. тест
-ADD plane plane2 6 1 1 1 гор. тест
-ADD train train1 1 1 1 гор. тест2
+ADD plane plane1 5 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD boat boat1 600 1999 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD plane plane2 6 1 1 1 РіРѕСЂ. С‚РµСЃС‚
+ADD train train1 1 1 1 РіРѕСЂ. С‚РµСЃС‚2
 PRINT
 ECHO ==============================================================
 
