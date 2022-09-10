@@ -32,7 +32,7 @@ class CircularLinkedList<T> {
     _length++;
   }
 
-  T get(int index) {
+  T? get(int index) {
     if (index < 0 || index >= _length) {
       throw RangeError("Index out of range");
     }
@@ -40,7 +40,7 @@ class CircularLinkedList<T> {
     for (var i = 0; i < index; i++) {
       node = node!.next as CircularLinkedListNode<T>?;
     }
-    return node!.data;
+    return node?.data;
   }
 
   void popHead() {

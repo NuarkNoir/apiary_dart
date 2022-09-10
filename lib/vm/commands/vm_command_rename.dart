@@ -9,6 +9,6 @@ class VMCommandRename implements VMCommand {
 
   @override
   Future<void> execute(VMContext ctx) async {
-    ctx.entities.get(_index).name = _newName;
+    ctx.entities.get(_index)?.name = _newName;
   }
 }
