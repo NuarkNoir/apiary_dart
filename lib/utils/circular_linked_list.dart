@@ -94,4 +94,12 @@ class CircularLinkedList<T> {
       popNth(index);
     }
   }
+
+  void clear() {
+    if (head != null && head!.next != head!.next) {
+      head!.next = null;
+    }
+    _head = null;
+    _length = 0;
+  }
 }
