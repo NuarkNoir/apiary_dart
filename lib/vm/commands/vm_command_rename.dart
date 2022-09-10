@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../vm.dart';
 import 'vm_command.dart';
 
@@ -9,6 +11,10 @@ class VMCommandRename implements VMCommand {
 
   @override
   Future<void> execute(VMContext ctx) async {
-    ctx.entities.get(_index)?.name = _newName;
+    if (_index < 0 || _index >= ctx.entities.length) {
+      stderr.writeln("rename: index out of range");
+    } else {
+      ctx.entities.get(_index)?.name = _newName;
+    }
   }
 }
