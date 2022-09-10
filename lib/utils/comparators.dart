@@ -37,14 +37,15 @@ class Comparators {
   }
 
   static bool _compareInt(int val, Object expected, String op) {
-    if (expected is int) {
+    if (expected is int || int.tryParse(expected.toString()) != null) {
+      int v = expected is int ? expected : int.parse(expected.toString());
       switch (op) {
         case "<":
-          return val < expected;
+          return val < v;
         case ">":
-          return val > expected;
+          return val > v;
         case "=":
-          return val == expected;
+          return val == v;
       }
     }
 
