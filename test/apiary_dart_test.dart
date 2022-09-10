@@ -1,5 +1,7 @@
 import 'package:apiary_dart/apiary_dart.dart';
+import 'package:apiary_dart/entities/train_entity.dart';
 import 'package:apiary_dart/utils/circular_linked_list.dart';
+import 'package:apiary_dart/vm/commands/vm_command_add.dart';
 import 'package:apiary_dart/vm/vm_commands.dart';
 import 'package:test/test.dart';
 
@@ -60,5 +62,25 @@ void main() {
       () => vmContext.executeCommands(),
       returnsNormally,
     );
+  });
+
+  test("VMCommandEcho rename", () async {
+    final vmContext = VMContext.createVMContext();
+    expect(
+      () => vmContext.pushCommand(
+          VMCommandAdd(TrainEntity(5, 5, "test", "train name", 8))),
+      returnsNormally,
+    );
+    expect(
+      () => vmContext.pushCommand(VMCommandRename(0, "new train name")),
+      returnsNormally,
+    );
+    await expectLater(
+      () async => vmContext.executeCommands(),
+      returnsNormally,
+    );
+    // await vmContext.executeCommands();
+    expect(vmContext.entities.length, 1);
+    expect(vmContext.entities.get(0).name, "new train name");
   });
 }
