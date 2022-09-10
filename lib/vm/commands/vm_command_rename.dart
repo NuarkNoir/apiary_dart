@@ -3,6 +3,9 @@ import 'dart:io';
 import '../vm.dart';
 import 'vm_command.dart';
 
+///
+/// Command to rename entity
+///
 class VMCommandRename implements VMCommand {
   final int _index;
   final String _newName;

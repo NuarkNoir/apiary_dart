@@ -1,8 +1,10 @@
-import 'package:apiary_dart/entities/base_entity.dart';
-
+import '../../entities/base_entity.dart';
 import '../vm.dart';
 import 'vm_command.dart';
 
+///
+/// Command to add entity to the list
+///
 class VMCommandAdd implements VMCommand {
   final BaseEntity _entity;
 

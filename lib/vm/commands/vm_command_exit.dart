@@ -3,6 +3,9 @@ import 'dart:io';
 import '../vm.dart';
 import 'vm_command.dart';
 
+///
+/// Command to exit the program
+///
 class VMCommandExit implements VMCommand {
   final int _code;
 

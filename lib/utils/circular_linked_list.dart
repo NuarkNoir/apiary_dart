@@ -1,13 +1,20 @@
 import 'circular_linked_list_node.dart';
 
+///
+/// Circular linked list
+/// [T] - type of the list
+///
 class CircularLinkedList<T> {
   CircularLinkedListNode<T>? _head;
   int _length = 0;
 
+  /// Length getter
   int get length => _length;
 
+  /// First node getter
   CircularLinkedListNode<T>? get head => _head;
 
+  /// Last node getter
   CircularLinkedListNode<T>? get tail {
     if (_head == null) {
       return null;
@@ -19,6 +26,10 @@ class CircularLinkedList<T> {
     return node;
   }
 
+  ///
+  /// Add node to the list
+  /// [node] - node to add
+  ///
   void add(T data) {
     final node = CircularLinkedListNode<T>(data);
     if (_head == null) {
@@ -32,6 +43,12 @@ class CircularLinkedList<T> {
     _length++;
   }
 
+  ///
+  /// Get value by index
+  /// [index] - index
+  ///
+  /// Returns value or throws [RangeError]
+  ///
   T? get(int index) {
     if (index < 0 || index >= _length) {
       throw RangeError("Index out of range");
@@ -57,6 +74,10 @@ class CircularLinkedList<T> {
     _length--;
   }
 
+  ///
+  /// Remove node by index
+  /// [n] - index
+  ///
   void popNth(int n) {
     if (n == 0) {
       popHead();
@@ -70,6 +91,11 @@ class CircularLinkedList<T> {
     _length--;
   }
 
+  ///
+  /// Find node by value
+  /// [data] - value
+  ///
+  /// Returns index or -1 if not found
   int find(T data) {
     if (_head != null) {
       var node = _head;
@@ -83,6 +109,10 @@ class CircularLinkedList<T> {
     return -1;
   }
 
+  ///
+  /// Remove node by value
+  /// [data] - value
+  ///
   void remove(T data) {
     // collapse first null check, because popHead() already checks for null
     if (_head == null || _head!.data == data) {
@@ -95,6 +125,9 @@ class CircularLinkedList<T> {
     }
   }
 
+  ///
+  /// Remove all nodes
+  ///
   void clear() {
     if (head != null && head!.next != head!.next) {
       head!.next = null;
@@ -103,6 +136,10 @@ class CircularLinkedList<T> {
     _length = 0;
   }
 
+  ///
+  /// Sort list by comparator
+  /// [comparator] - comparator
+  ///
   void sort(bool Function(T a, T b) comparator) {
     if (_head == null) {
       return;

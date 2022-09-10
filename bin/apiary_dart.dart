@@ -2,6 +2,10 @@ import 'dart:io';
 
 import 'package:apiary_dart/apiary_dart.dart' as apiary_dart;
 
+///
+/// Main function
+/// [arguments] - command line arguments
+///
 void main(List<String> arguments) async {
   if (arguments.length > 1 ||
       (arguments.length == 1 && !File(arguments[0]).existsSync())) {
@@ -16,6 +20,9 @@ void main(List<String> arguments) async {
   }
 }
 
+///
+/// Run REPL
+///
 Future<void> runRepl() async {
   final vmContext = apiary_dart.VMContext.createVMContext();
   final parser = apiary_dart.Parser();
@@ -37,6 +44,10 @@ Future<void> runRepl() async {
   }
 }
 
+///
+/// Run file
+/// [path] - file path
+///
 Future<void> runFile(String path) {
   final vmContext = apiary_dart.VMContext.createVMContext();
 

@@ -2,6 +2,9 @@ import '../../utils/comparators.dart';
 import '../vm.dart';
 import 'vm_command.dart';
 
+///
+/// Command to remove entity from the list by its attr value
+///
 class VMCommandRem implements VMCommand {
   final String _attr;
   final String _value;

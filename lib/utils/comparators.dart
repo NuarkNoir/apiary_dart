@@ -1,12 +1,23 @@
-import 'package:apiary_dart/entities/boat_entity.dart';
-import 'package:apiary_dart/entities/plane_entity.dart';
-
 import '../entities/base_entity.dart';
 import '../entities/train_entity.dart';
+import '../entities/boat_entity.dart';
+import '../entities/plane_entity.dart';
 
-typedef AttrSelector = bool Function<T>(T, String, Object, String);
-
+///
+/// Class with static methods to compare entities and attrs
+///
 class Comparators {
+  ///
+  /// Compare two entities attr
+  /// [obj] - entity to compare
+  /// [attr] - attr to compare
+  /// [value] - value to compare
+  /// [op] - compare operator
+  ///
+  /// Returns:
+  /// true - if obj.attr op value,
+  /// false - if obj.attr op! value
+  ///
   static bool compareAttr(
     BaseEntity obj,
     String attr,
@@ -24,6 +35,16 @@ class Comparators {
     return false;
   }
 
+  ///
+  /// Compare two entities
+  /// [a] - first entity to compare
+  /// [b] - second entity to compare
+  /// [attr] - attr to compare
+  ///
+  /// Returns:
+  /// true - if a.attr == b.attr,
+  /// false - if a.attr != b.attr
+  ///
   static bool compareEntities(BaseEntity a, BaseEntity b, String attr) {
     if (a is TrainEntity) {
       return Comparators._compareTrainEntities(a, b, attr);

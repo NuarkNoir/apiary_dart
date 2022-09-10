@@ -3,6 +3,9 @@ import 'dart:io';
 import '../vm.dart';
 import 'vm_command.dart';
 
+///
+/// Command to print the list
+///
 class VMComandPrint implements VMCommand {
   @override
   Future<void> execute(VMContext ctx) async {

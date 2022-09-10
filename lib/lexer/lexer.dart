@@ -9,11 +9,23 @@ import '../entities/train_entity.dart';
 import '../parser/token.dart';
 import '../vm/vm_commands.dart';
 
+///
+/// Lexer class
+///
 class Lexer {
   static final List<String> _validDestPrefixes = [];
 
+  ///
+  /// Private constructor
+  ///
   Lexer._();
 
+  ///
+  /// Lex list of list of tokens
+  /// [linesOfTokens] - list of list of tokens
+  ///
+  /// Returns list of list of [VMCommand]s
+  ///
   static List<VMCommand> lex(List<List<Token>> linesOfTokens) {
     _validDestPrefixes.clear();
     List<VMCommand> commands = [];
