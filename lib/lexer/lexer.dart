@@ -72,6 +72,8 @@ class Lexer {
           return _parseRename(args);
         case 'sort':
           return _parseSort(args);
+        case 'cspd':
+          return _parseCheckSpeed(args);
       }
     }
 
@@ -294,5 +296,13 @@ class Lexer {
     return OptionalOf.error(Exception(
       'Error: sort should be `sort <attribute>`',
     ));
+  }
+
+  static OptionalOf<VMComand> _parseCheckSpeed(List<Token> args) {
+    if (Lexer._expectTokens(args, [])) {
+      return OptionalOf.ok(VMComandCheckSpeed());
+    }
+
+    return OptionalOf.error(Exception('Error: cspd should be `cspd`'));
   }
 }

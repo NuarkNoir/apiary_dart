@@ -7,3 +7,4 @@ export 'comands/vm_comand_rem.dart';
 export 'comands/vm_comand_clear.dart';
 export 'comands/vm_comand_print.dart';
 export 'comands/vm_comand_sort.dart';
+export 'comands/vm_comand_check_speed.dart';
